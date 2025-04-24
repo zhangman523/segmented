@@ -24,6 +24,8 @@ export interface MotionThumbInterface {
   onMotionEnd: VoidFunction;
   direction?: 'ltr' | 'rtl';
   vertical?: boolean;
+  onAppearStart?: (vertical?: boolean) => React.CSSProperties | void;
+  onAppearActive?: (vertical?: boolean) => React.CSSProperties | void;
 }
 
 const calcThumbStyle = (
@@ -146,6 +148,9 @@ export default function MotionThumb(props: MotionThumbInterface) {
 
   // =========================== Motion ===========================
   const onAppearStart = () => {
+    if (props.onAppearStart) {
+      return props.onAppearStart(vertical);
+    }
     if (vertical) {
       return {
         transform: 'translateY(var(--thumb-start-top))',
@@ -160,6 +165,9 @@ export default function MotionThumb(props: MotionThumbInterface) {
   };
 
   const onAppearActive = () => {
+    if (props.onAppearActive) {
+      return props.onAppearActive(vertical);
+    }
     if (vertical) {
       return {
         transform: 'translateY(var(--thumb-active-top))',

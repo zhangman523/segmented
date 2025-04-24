@@ -44,6 +44,8 @@ export interface SegmentedProps<ValueType = SegmentedValue>
   name?: string;
   classNames?: Partial<Record<SemanticName, string>>;
   styles?: Partial<Record<SemanticName, React.CSSProperties>>;
+  onAppearStart?: (vertical?: boolean) => React.CSSProperties | void;
+  onAppearActive?: (vertical?: boolean) => React.CSSProperties | void;
 }
 
 function getValidTitle(option: SegmentedLabeledOption) {
@@ -174,6 +176,8 @@ const Segmented = React.forwardRef<HTMLDivElement, SegmentedProps>(
       styles,
       classNames: segmentedClassNames,
       motionName = 'thumb-motion',
+      onAppearStart,
+      onAppearActive,
       ...restProps
     } = props;
 
@@ -293,6 +297,8 @@ const Segmented = React.forwardRef<HTMLDivElement, SegmentedProps>(
             onMotionEnd={() => {
               setThumbShow(false);
             }}
+            onAppearStart={onAppearStart}
+            onAppearActive={onAppearActive}
           />
           {segmentedOptions.map((segmentedOption) => (
             <InternalSegmentedOption
