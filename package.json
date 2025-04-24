@@ -1,5 +1,5 @@
 {
-  "name": "@rc-component/segmented",
+  "name": "@jst-component/segmented",
   "version": "1.1.0",
   "description": "React segmented controls used in ant.design",
   "keywords": [
